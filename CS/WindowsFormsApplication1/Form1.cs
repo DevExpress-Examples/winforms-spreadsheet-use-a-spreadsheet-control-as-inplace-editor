@@ -51,7 +51,7 @@ namespace WindowsFormsApplication1 {
             currentTable.Columns.Clear();
             SpreadsheetControl spreadSheet = (sender as PopupContainerEdit).Properties.PopupControl.Controls[0] as SpreadsheetControl;
             Worksheet workSheet = spreadSheet.Document.Worksheets[0];
-            Range usedRange = workSheet.GetUsedRange();
+            CellRange usedRange = workSheet.GetUsedRange();
 
             for(int i = 0; i < usedRange.ColumnCount; i++) {
                 currentTable.Columns.Add("Column" + i.ToString());
