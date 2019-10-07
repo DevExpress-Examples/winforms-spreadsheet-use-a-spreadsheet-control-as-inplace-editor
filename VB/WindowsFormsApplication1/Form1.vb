@@ -53,9 +53,9 @@ Namespace WindowsFormsApplication1
 			currentTable.Columns.Clear()
 			Dim spreadSheet As SpreadsheetControl = TryCast((TryCast(sender, PopupContainerEdit)).Properties.PopupControl.Controls(0), SpreadsheetControl)
 			Dim workSheet As Worksheet = spreadSheet.Document.Worksheets(0)
-			Dim usedRange As Range = workSheet.GetUsedRange()
+            Dim usedRange As CellRange = workSheet.GetUsedRange()
 
-			For i As Integer = 0 To usedRange.ColumnCount - 1
+            For i As Integer = 0 To usedRange.ColumnCount - 1
 				currentTable.Columns.Add("Column" & i.ToString())
 			Next i
 
