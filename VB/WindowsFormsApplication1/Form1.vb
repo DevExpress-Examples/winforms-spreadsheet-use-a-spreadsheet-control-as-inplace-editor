@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports System.Data
@@ -16,11 +15,12 @@ Imports DevExpress.Spreadsheet
 Namespace WindowsFormsApplication1
 	Partial Public Class Form1
 		Inherits Form
+
 		Public Sub New()
 			InitializeComponent()
 		End Sub
 
-		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 			Dim rePopupContainer As RepositoryItemPopupContainerEdit = TryCast(propertyGridControl1.RepositoryItems.Add("PopupContainerEdit"), RepositoryItemPopupContainerEdit)
 
 			rePopupContainer.PopupControl = popupContainerControl1
@@ -33,7 +33,7 @@ Namespace WindowsFormsApplication1
 			Dim newObject As New MyObject()
 
 			propertyGridControl1.SelectedObject = newObject
-			gridControl1.DataSource = New BindingList(Of MyObject) (New MyObject() {newObject})
+			gridControl1.DataSource = New BindingList(Of MyObject)() From {newObject}
 			gridControl1.ForceInitialize()
 
 			gridView1.Columns("MySpreadSheet").ColumnEdit = rePopupContainer
@@ -53,9 +53,9 @@ Namespace WindowsFormsApplication1
 			currentTable.Columns.Clear()
 			Dim spreadSheet As SpreadsheetControl = TryCast((TryCast(sender, PopupContainerEdit)).Properties.PopupControl.Controls(0), SpreadsheetControl)
 			Dim workSheet As Worksheet = spreadSheet.Document.Worksheets(0)
-            Dim usedRange As CellRange = workSheet.GetUsedRange()
+			Dim usedRange As CellRange = workSheet.GetUsedRange()
 
-            For i As Integer = 0 To usedRange.ColumnCount - 1
+			For i As Integer = 0 To usedRange.ColumnCount - 1
 				currentTable.Columns.Add("Column" & i.ToString())
 			Next i
 
@@ -95,23 +95,7 @@ Namespace WindowsFormsApplication1
 			Next i
 		End Sub
 
-		Private privateName As String
 		Public Property Name() As String
-			Get
-				Return privateName
-			End Get
-			Set(ByVal value As String)
-				privateName = value
-			End Set
-		End Property
-		Private privateMySpreadSheet As DataTable
 		Public Property MySpreadSheet() As DataTable
-			Get
-				Return privateMySpreadSheet
-			End Get
-			Set(ByVal value As DataTable)
-				privateMySpreadSheet = value
-			End Set
-		End Property
 	End Class
 End Namespace
